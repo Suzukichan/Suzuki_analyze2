@@ -1,6 +1,5 @@
 import pandas as pd
 import yfinance as yf
-from tqdm import tqdm
 import os
 from datetime import datetime, timedelta
 
@@ -22,7 +21,7 @@ def fetch_technical_data():
     start_date = end_date - timedelta(days=60)
     
     # Iterate through each stock code
-    for idx, row in tqdm(symbols_df.iterrows(), total=len(symbols_df), desc="Fetching technical data"):
+    for idx, row in symbols_df.iterrows():
         code = str(row['Code']).zfill(4)
         name = row['Name']
         market = row['Market']
