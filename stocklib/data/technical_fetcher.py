@@ -3,7 +3,7 @@ import yfinance as yf
 import os
 from datetime import datetime, timedelta
 
-def fetch_technical_data():
+def fetch_technical_data(progress_callback=None):
     """
     Fetch 60 days of technical data (Close, Volume) for Japanese stocks
     Read symbols from data_store/symbols.csv
@@ -20,8 +20,11 @@ def fetch_technical_data():
     end_date = datetime.now()
     start_date = end_date - timedelta(days=60)
     
+    total = len(symbols_df)
     # Iterate through each stock code
     for idx, row in symbols_df.iterrows():
+        if progress_callback:
+            progress_callback(idx, total)
         code = str(row['Code']).zfill(4)
         name = row['Name']
         market = row['Market']
@@ -61,6 +64,9 @@ def fetch_technical_data():
         except Exception as e:
             print(f'Error fetching technical data for {code} ({name}): {e}')
     
+    if progress_callback:
+        progress_callback(total, total)
+        
     # Combine all results
     if all_results:
         final_df = pd.concat(all_results, ignore_index=True)

@@ -3,7 +3,7 @@ import yfinance as yf
 from tqdm import tqdm
 import os
 
-def fetch_fundamentals():
+def fetch_fundamentals(progress_callback=None):
     """
     Fetch fundamental data (PER, PBR, ROE) for Japanese stocks
     Read symbols from data_store/symbols.csv
@@ -50,6 +50,9 @@ def fetch_fundamentals():
                 'ROE': None
             })
     
+    if progress_callback:
+        progress_callback(total, total)
+
     # Save results to CSV
     results_df = pd.DataFrame(results)
     results_df.to_csv('data_store/fundamentals/raw.csv', index=False)
