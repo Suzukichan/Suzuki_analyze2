@@ -52,7 +52,7 @@ def fetch_technical_data(progress_callback=None):
                 hist_reset.rename(columns={'Date': 'Date', 'Close': 'Close', 'Volume': 'Volume'}, inplace=True)
                 
                 # Select and reorder columns
-                result_df = hist_reset[['Code', 'Name', 'Market', 'Sector', 'Date', 'Close', 'Volume']]
+                result_df = hist_reset[['Code', 'Name', 'Market', 'Sector', 'Date', 'Close', 'Volume']].copy()
                 
                 # Convert Date to string format (YYYY-MM-DD)
                 result_df['Date'] = result_df['Date'].dt.strftime('%Y-%m-%d')
@@ -63,6 +63,31 @@ def fetch_technical_data(progress_callback=None):
                 
         except Exception as e:
             print(f'Error fetching technical data for {code} ({name}): {e}')
+            
+    # Fetch Nikkei 225 data
+    try:
+        nikkei_symbol = '^N225'
+        print("Fetching Nikkei 225 data...")
+        stock_n225 = yf.Ticker(nikkei_symbol)
+        hist_n225 = stock_n225.history(start=start_date, end=end_date)
+        
+        if len(hist_n225) > 0:
+            hist_n225_reset = hist_n225.reset_index()
+            # Set columns to match the standard symbol result format
+            hist_n225_reset['Code'] = 'N225'
+            hist_n225_reset['Name'] = '日経平均'
+            hist_n225_reset['Market'] = '指数'
+            hist_n225_reset['Sector'] = '市場全体'
+            
+            hist_n225_reset.rename(columns={'Date': 'Date', 'Close': 'Close', 'Volume': 'Volume'}, inplace=True)
+            result_n225_df = hist_n225_reset[['Code', 'Name', 'Market', 'Sector', 'Date', 'Close', 'Volume']].copy()
+            result_n225_df['Date'] = result_n225_df['Date'].dt.strftime('%Y-%m-%d')
+            
+            all_results.append(result_n225_df)
+        else:
+            print('No data available for Nikkei 225')
+    except Exception as e:
+        print(f'Error fetching technical data for Nikkei 225: {e}')
     
     if progress_callback:
         progress_callback(total, total)
