@@ -13,11 +13,14 @@ def fetch_fundamentals(progress_callback=None):
     os.makedirs('data_store/fundamentals', exist_ok=True)
     
     # Read symbols from CSV
-    symbols_df = pd.read_csv('data_store/symbols.csv')
+    symbols_df = pd.read_csv('data_store/symbols.csv', sep='\t')
     results = []
+    total = len(symbols_df)
     
     # Iterate through each stock code
-    for idx, row in tqdm(symbols_df.iterrows(), total=len(symbols_df), desc="Fetching fundamentals"):
+    for idx, row in tqdm(symbols_df.iterrows(), total=total, desc="Fetching fundamentals"):
+        if progress_callback:
+            progress_callback(idx, total)
         code = str(row['Code'])
         name = row['Name']
         

@@ -60,7 +60,8 @@ class AdminApp:
                 fetch_fundamentals(progress_callback=self.update_progress)
                 self.root.after(0, lambda: messagebox.showinfo("完了", "ファンダメンタルデータの収集が完了しました。"))
             except Exception as e:
-                self.root.after(0, lambda: messagebox.showerror("エラー", f"失敗しました:\n{e}"))
+                err_msg = str(e)
+                self.root.after(0, lambda m=err_msg: messagebox.showerror("エラー", f"失敗しました:\n{m}"))
             finally:
                 self.root.after(0, self._enable_buttons)
                 
@@ -76,7 +77,8 @@ class AdminApp:
                 fetch_technical_data(progress_callback=self.update_progress)
                 self.root.after(0, lambda: messagebox.showinfo("完了", "テクニカルデータの収集が完了しました。"))
             except Exception as e:
-                self.root.after(0, lambda: messagebox.showerror("エラー", f"失敗しました:\n{e}"))
+                err_msg = str(e)
+                self.root.after(0, lambda m=err_msg: messagebox.showerror("エラー", f"失敗しました:\n{m}"))
             finally:
                 self.root.after(0, self._enable_buttons)
                 
@@ -94,7 +96,8 @@ class AdminApp:
                 fetch_technical_data(progress_callback=self.update_progress)
                 self.root.after(0, lambda: messagebox.showinfo("完了", "両方のデータ収集が完了しました。"))
             except Exception as e:
-                self.root.after(0, lambda: messagebox.showerror("エラー", f"失敗しました:\n{e}"))
+                err_msg = str(e)
+                self.root.after(0, lambda m=err_msg: messagebox.showerror("エラー", f"失敗しました:\n{m}"))
             finally:
                 self.root.after(0, self._enable_buttons)
                 
@@ -110,7 +113,8 @@ class AdminApp:
                 combine_data_to_excel()
                 self.root.after(0, lambda: messagebox.showinfo("完了", "Excelへの統合が完了しました（data_store/combined/combined.xlsx）。"))
             except Exception as e:
-                self.root.after(0, lambda: messagebox.showerror("エラー", f"失敗しました:\n{e}"))
+                err_msg = str(e)
+                self.root.after(0, lambda m=err_msg: messagebox.showerror("エラー", f"失敗しました:\n{m}"))
             finally:
                 self.root.after(0, self._enable_buttons)
                 

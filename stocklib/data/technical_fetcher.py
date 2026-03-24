@@ -13,7 +13,7 @@ def fetch_technical_data(progress_callback=None):
     os.makedirs('data_store/technical', exist_ok=True)
     
     # Read symbols from CSV
-    symbols_df = pd.read_csv('data_store/symbols.csv')
+    symbols_df = pd.read_csv('data_store/symbols.csv', sep='\t')
     all_results = []
     
     # Calculate date range (60 days)
