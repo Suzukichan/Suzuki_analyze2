@@ -20,17 +20,17 @@ class AppLauncher:
         
         # ボタン: 管理者画面
         self.btn_admin = tk.Button(root, text="裏方・管理者画面\n(データ収集・統合・設定管理)", 
-                                   command=self.launch_admin, width=35, height=2, bg="#f0f0f0")
+                                   command=self.launch_admin, width=35, height=1, bg="#f0f0f0")
         self.btn_admin.pack(pady=10)
         
         # ボタン: 分析画面
         self.btn_analysis = tk.Button(root, text="銘柄分析・スクリーニング画面\n(最新データの可視化と絞り込み)", 
-                                      command=self.launch_analysis, width=35, height=2, bg="#e6f2ff")
+                                      command=self.launch_analysis, width=35, height=4, bg="#e6f2ff")
         self.btn_analysis.pack(pady=10)
         
         # ボタン: シミュレーション画面
         self.btn_sim = tk.Button(root, text="バックテスト・シミュレーション画面\n(条件による過去データの取引検証)", 
-                                 command=self.launch_simulation, width=35, height=2, bg="#e6ffe6")
+                                 command=self.launch_simulation, width=35, height=4, bg="#e6ffe6")
         self.btn_sim.pack(pady=10)
 
     def launch_script(self, script_path):
