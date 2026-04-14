@@ -2,6 +2,7 @@ import pandas as pd
 import yfinance as yf
 from datetime import datetime
 import os
+import time
 import logging
 
 # ログ設定
@@ -90,6 +91,8 @@ def fetch_fundamental_data(symbols, output_path='data_store/fundamentals/raw.csv
                 'ROE': None,
                 'Company_Name': None,
             })
+            
+        time.sleep(0.3)
     
     # DataFrameに変換
     df = pd.DataFrame(data_list)

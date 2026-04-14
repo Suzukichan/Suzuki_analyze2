@@ -2,6 +2,7 @@ import pandas as pd
 import yfinance as yf
 from tqdm import tqdm
 import os
+import time
 
 # Step 1: Read symbols from data_store/symbols.csv
 symbols_df = pd.read_csv('data_store/symbols.csv')
@@ -35,6 +36,8 @@ for index, row in tqdm(symbols_df.iterrows(), total=symbols_df.shape[0]):
             })
     except Exception as e:
         print(f"Error fetching data for {stock_tse_code}: {str(e)}")
+        
+    time.sleep(0.3)
 
 # Step 5: Save results to data_store/technical/raw.csv
 result_df = pd.DataFrame(data)
