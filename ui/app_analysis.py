@@ -39,9 +39,7 @@ class AnalysisApp:
         columns_sec = (
             "Sector",
             "Mom5_Avg",
-            "Mom5_Rel",
             "Mom10_Avg",
-            "Mom10_Rel",
             "VolRatio_Avg",
             "VolRatio_Rel",
         )
@@ -51,9 +49,7 @@ class AnalysisApp:
 
         self.tree_sector.heading("Sector", text="セクター名")
         self.tree_sector.heading("Mom5_Avg", text="5日モメンタム平均")
-        self.tree_sector.heading("Mom5_Rel", text="5日モメンタム相対強度")
         self.tree_sector.heading("Mom10_Avg", text="10日モメンタム平均")
-        self.tree_sector.heading("Mom10_Rel", text="10日モメンタム相対強度")
         self.tree_sector.heading("VolRatio_Avg", text="5日出来高変化率")
         self.tree_sector.heading("VolRatio_Rel", text="出来高変化率相対強度")
 
@@ -284,9 +280,7 @@ class AnalysisApp:
                     values=(
                         sector,
                         f"{row['Mom5']:.2f}%",
-                        f"{rel_mom5:.3f}",
                         f"{row['Mom10']:.2f}%",
-                        f"{rel_mom10:.3f}",
                         f"{row['VolRatio']:.3f}",
                         f"{rel_vol:.3f}",
                     ),
@@ -300,9 +294,7 @@ class AnalysisApp:
                     values=(
                         sector,
                         f"{row['Mom5']:.2f}%",
-                        "N/A",
                         f"{row['Mom10']:.2f}%",
-                        "N/A",
                         f"{row['VolRatio']:.3f}",
                         "N/A",
                     ),
