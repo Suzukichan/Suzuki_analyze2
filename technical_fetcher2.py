@@ -42,7 +42,7 @@ def fetch_one(symbol_info):
         records = []
         for date, row in df.iterrows():
             records.append({
-                'Code': code,
+                'Code': symbol_info["Code"],
                 'Name': symbol_info["Name"],
                 'Market': symbol_info["Market"],
                 'Sector': symbol_info["Sector"],
